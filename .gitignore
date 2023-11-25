@@ -140,6 +140,7 @@ ENV/
 env.bak/
 venv.bak/
 .vir_pyt_env
+.vir_pyt_env/
 
 # Spyder project settings
 .spyderproject
