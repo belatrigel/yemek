@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+#import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d#91b0yszm=*q75@yr_9x-7)y)zv*rg&iqhrok=&2s5_9fmbrg'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "accounts",
 ]
 
 MIDDLEWARE = [
@@ -50,11 +53,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'project_main.urls'
-
+#print(os.path.join(BASE_DIR, "project_main","templates")) gerekirse bunu TEMPLATES/DIRS içinde kullan
+      
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["project_main/templates",
+                 "accounts/templates",
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,8 +81,11 @@ WSGI_APPLICATION = 'project_main.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': config("ENGINE"),
+        'NAME': config("NAME"),
+        'USER': config("USER"),
+        'PASSWORD': config("PASSWORD"),
+        "HOST": config("HOST"),
     }
 }
 
@@ -116,8 +125,25 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    "project_main/static",
+]
+STATIC_ROOT = BASE_DIR /"static"
+
+# media için ayarlayayım.
+MEDIA_URL = "medias/"
+MEDIA_ROOT = BASE_DIR /"media_files"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = "accounts.User"
+
+# sweetalert2 için soru işareti ekledim.
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    50: "question",
+}
