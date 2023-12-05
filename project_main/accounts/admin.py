@@ -14,9 +14,14 @@ class MyUserAdmin(UserAdmin):
         (
         "Giriş", {
             "classes" : ("wide",),
-            "fields" : ("role", "isim", "soyisim", "elmek", "phone", "username","password1","password2")
+            "fields" : ("username","password1","password2",)
+        }),
+        (
+        "Detay", {
+            "classes" : ("wide",),
+            "fields" : ("role", "isim", "soyisim", "elmek", "phone", )
         }
-    ),
+    )
     )
 
     list_display = ("isim", "soyisim", "elmek", "role", "created_date", "son_login","is_aktif",)

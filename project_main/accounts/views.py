@@ -10,7 +10,7 @@ def register(request):
         print(request.POST)
         form = UserForm(request.POST)
         if form.is_valid():
-            this_password = form.cleaned_data["password"]
+            this_password = form.cleaned_data["password"] # bu cleaned_data çağrısında metho çağırır
             myuser = form.save(commit=False)
             myuser.set_password(this_password)
             myuser.role = User.CUSTOMER

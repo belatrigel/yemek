@@ -8,6 +8,9 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["isim", "soyisim","username","elmek","phone", "password",]
+        widgets = {
+            'isim': forms.TextInput(attrs={'id': 'my-field-id'})
+        }
 
     def clean(self):
         cleaned_data = super(UserForm,self).clean()

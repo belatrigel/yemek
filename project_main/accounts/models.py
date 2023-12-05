@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.exceptions import ValidationError
 import re
+from django.contrib.auth.models import PermissionsMixin
 
 # phone regular expression --- min 8 max 13 only numbers
 def validate_phone_format(value):
@@ -16,7 +17,7 @@ class UserManager(BaseUserManager):
             raise ValueError("isim bilgisi girilmelidir")
         if not surname:
             raise ValueError("soyisim bilgisi girilmelidir")
-        if not kullanici_adi:
+        if not username:
             raise ValueError("kullanıcı adı bilgisi girilmelidir")
         if not gorev:
             raise ValueError("role bilgisi girilmelidir")
@@ -69,11 +70,11 @@ class KisiAbsModel(models.Model):
     class Meta:
         abstract = True
 
-class User(AbstractBaseUser, KisiAbsModel):
+class User(AbstractBaseUser, KisiAbsModel, PermissionsMixin):
     RESTAURANT = 1
     CUSTOMER = 2
     choices = (
-        (RESTAURANT, "işletmeci"),
+        (RESTAURANT, "Vendor"),
         (CUSTOMER, "müşteri"),
     )
     role = models.PositiveSmallIntegerField(choices=choices, blank=True, null=True)
@@ -95,7 +96,7 @@ class User(AbstractBaseUser, KisiAbsModel):
     objects = UserManager()
 
     def __str__(self):
-        return f"{self.isim} {self.soyisim}, {self.elmek}"
+        return f"{self.isim.title()} {self.soyisim.title()}, {self.elmek.split('@')[0]}"
 
     def has_perm(self, perm, obj=None):
         return self.is_yonetici
