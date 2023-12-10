@@ -47,7 +47,7 @@ class UserManager(BaseUserManager):
             elmek = self.normalize_email(elmek),
             name = isim,
             surname = soyisim,
-            kullanici_adi= username,
+            username= username,
             sifre = password,
             telno = phone,
             gorev = role,
@@ -103,6 +103,13 @@ class User(AbstractBaseUser, KisiAbsModel, PermissionsMixin):
 
     def has_module_perms(self, app_label):
         return True
+    
+    def get_user_role(self):
+        if self.role == 1:
+            myrole = "RESTAURANT"
+        elif self.role == 2:
+            myrole = "CUSTOMER"
+        return myrole
     
 class UserProfile(models.Model):
     

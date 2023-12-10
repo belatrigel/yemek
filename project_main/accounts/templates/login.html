@@ -1,0 +1,114 @@
+{% extends 'base.html' %} {% load static %} {% block extra_css %}
+
+<link href="{% static 'css/loginstyle.css' %}" rel="stylesheet" />
+
+{% endblock %} {% block content%}
+
+<!-- Main Section Start -->
+<div class="main-section">
+  <div
+    class="page-section nopadding cs-nomargin"
+    style="
+      margin-top: 20px;
+      padding-top: 80px;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
+    "
+  >
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div
+            class="user-dashboard loader-holder"
+            style="width: 550px; min-width: auto"
+          >
+            <div class="user-holder">
+              <div id="restaurant-sets-holder">
+                <h4 class="text-center" style="margin-bottom: 0">
+                  FOODONLINE Uygulamasına hoş geldiniz.
+                </h4>
+                <p class="text-center">Lütfen Sisteme Giriş Yapınız</p>
+                <hr />
+                <div id="restaurant-sets-holder">
+                  <form
+                    action="{% url 'accounts:loginme' %}"
+                    id="login-form"
+                    class="login-form"
+                    autocomplete="off"
+                    role="main"
+                    method="POST"
+                    enctype="multipart/form-data"
+                  >
+                    {% csrf_token %}
+
+                    <div>
+                      <label class="label-email">
+                        <input
+                          type="email"
+                          class="text"
+                          name="email"
+                          placeholder="Lütfen elmek adresini giriniz."
+                          tabindex="1"
+                          required
+                        />
+                        <span class="required" style="font-size: 1rem"
+                          >Email Adresi</span
+                        >
+                      </label>
+                    </div>
+                    <div>
+                      <label class="label-password">
+                        <input
+                          type="text"
+                          class="text"
+                          name="password"
+                          placeholder="Lütfen şifrenizi giriniz."
+                          tabindex="2"
+                          required
+                        />
+                        <span class="required" style="font-size: 1rem"
+                          >Parola</span
+                        >
+                      </label>
+                    </div>
+                    <input
+                      type="checkbox"
+                      name="show-password"
+                      class="show-password a11y-hidden"
+                      id="show-password"
+                      tabindex="3"
+                    />
+                    <label class="label-show-password" for="show-password">
+                      <span style="font-size: 1rem">Show Password</span>
+                    </label>
+                    <div class="email">
+                      <a href="#">Şifremi Unuttum?</a>
+                    </div>
+                    <div style="justify-content:center; display: flex; align-items: center;">
+                      <input type="submit" value="Gönder" />
+                    </div>
+                    <figure class="emrah" aria-hidden="true">
+                      <div class="person-body"></div>
+                      <div class="neck skin"></div>
+                      <div class="head skin">
+                        <div class="eyes"></div>
+                        <div class="mouth"></div>
+                      </div>
+                      <div class="hair"></div>
+                      <div class="ears"></div>
+                      <div class="shirt-1"></div>
+                      <div class="shirt-2"></div>
+                    </figure>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Main Section End -->
+
+  {% endblock %}
+</div>

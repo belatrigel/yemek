@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.urls import reverse
 
 from accounts.forms import UserForm
 from vendors.forms import VendorForm
@@ -8,6 +9,9 @@ from django.contrib import messages
 # Create your views here.
 
 def register(request):
+    if request.user.is_authenticated:
+        messages.add_message(request, messages.INFO, "Zaten Giriş yaptığınız için dashboard yönlendirdim.")
+        return redirect(reverse("accounts:dashboardme"))
     form = UserForm()
     v_form = VendorForm()
 

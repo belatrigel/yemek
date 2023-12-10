@@ -9,7 +9,7 @@ class VendorAdmin(admin.ModelAdmin):
     fieldsets = ()
     
     list_display = ("vendor_name", "user", "is_approved", "created_at", "modified_at",)
-    list_display_links = ["user","vendor_name",]
+    list_display_links = ["user","vendor_name",] # bunlardan birine bassam sayfaya çıkarım
     search_fields = ("vendor_name", "is_approved", "created_at",)
     ordering = ("-created_at",)
 

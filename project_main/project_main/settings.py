@@ -63,6 +63,7 @@ TEMPLATES = [
         'DIRS': ["project_main/templates",
                  "accounts/templates",
                  "jazzmin/templates",
+                 "vendors/templates",
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
