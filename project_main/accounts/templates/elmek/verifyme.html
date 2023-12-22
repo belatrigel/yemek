@@ -1,0 +1,9 @@
+{% autoescape off %}
+
+Hi {{user.isim}} {{user.soyisim}},
+
+Lütfen Aşağıdaki Linke tıklayarak aktivasyon işleminizi tamamlayınız.
+http://{{domain}}{% url 'accounts:activate' uid64=uid mytoken=token %}
+
+{% endautoescape %}
+

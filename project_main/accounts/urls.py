@@ -9,6 +9,9 @@ urlpatterns = [
     path('logout/', views.logout, name="logoutme"),
     path('decideWheretoGo/', views.decidemyboard, name='decidemyboard'),
     path('musteriBoard/', views.customboard, name = "musterinDashboard"),
-    path('vendorBoard/', views.vendorboard , name = "restoranDashboard")
-
+    path('vendorBoard/', views.vendorboard , name = "restoranDashboard"),
+    path('activateme/<uid64>/<mytoken>/', views.activate, name= "activate"),
+    path('forgotpassword/', views.forgotpassword, name= "forgotpassword"),
+    path('resetme/<uid64>/<mytoken>/', views.resetme, name= "resetme"),
+    path("reset_password/", views.reset_password, name = "reset_password")
 ]

@@ -1,0 +1,9 @@
+{% autoescape off %}
+
+Hi {{user.isim}} {{user.soyisim}},
+
+Lütfen Aşağıdaki Linke tıklayarak resetleme işleminizi tamamlayınız.
+http://{{domain}}{% url 'accounts:resetme' uid64=uid mytoken=token %}
+
+{% endautoescape %}
+

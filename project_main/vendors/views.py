@@ -5,6 +5,7 @@ from accounts.forms import UserForm
 from vendors.forms import VendorForm
 from accounts.models import User, UserProfile
 from django.contrib import messages
+from accounts import utilities
 
 # Create your views here.
 
@@ -39,6 +40,11 @@ def register(request):
             vendor.user_profile = UserProfile.objects.get(user = kisi) # ben kisi save dediğim anda signals sayesinde profile otomatik oluştu ve bağlandı
 
             vendor.save()
+
+            # send verifikasyon elmek helper fonksiyonu tıpkı normal user sign up gibi...
+            utilities.send_verificasyion_elmek(request, myuser,
+                                               "Hello From FoodOnline, Please activate your account",
+                                               "elmek/verifyme.html")
 
             messages.add_message(request, messages.SUCCESS, "Restoran Kayıt işlemi başarıyla tamamlanmıştır. Onay bekleyiniz.")
             return redirect("index")
