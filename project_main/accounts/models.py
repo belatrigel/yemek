@@ -130,6 +130,9 @@ class UserProfile(models.Model):
     def __str__(self):
         return f"{self.user}"
 
+    def full_address(self):
+        return f"{self.adress_1} {self.adress_2}"
+
 
 
 from django.db.models.signals import post_save

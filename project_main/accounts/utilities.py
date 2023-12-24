@@ -33,3 +33,11 @@ def send_verificasyion_elmek(request,user, elmek_subject, html_file):
     to_email = user.elmek
     mail = EmailMessage(elmek_subject, message, from_email=from_email, to=[to_email,])
     mail.send()
+
+def send_decision_elmek(elmek_subject, elmek_template, context):
+    from_email = settings.DEFAULT_FROM_EMAIL
+    message = render_to_string(elmek_template, context)
+    # aslında burada context olarak gidiyor tüm herşey
+    to_email = context["user"].elmek
+    mail = EmailMessage(elmek_subject, message, from_email=from_email, to=[to_email,])
+    mail.send()

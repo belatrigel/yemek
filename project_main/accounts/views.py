@@ -9,6 +9,7 @@ from . import utilities
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
+from vendors.models import Vendor
 
 
 from django.core.exceptions import PermissionDenied
@@ -96,7 +97,7 @@ def customboard(request):
 @login_required(login_url= 'accounts:loginme')
 @user_passes_test(check_vendor_user)
 def vendorboard(request):
-        return render(request, "vendorBoard.html")
+        return render(request, "vendorBoard.html",)
 
 def activate(request, uid64, mytoken):
     try:

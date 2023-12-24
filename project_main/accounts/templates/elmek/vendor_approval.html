@@ -1,0 +1,15 @@
+{% autoescape off %}
+
+Hi {{user.isim}} {{user.soyisim}},
+
+{% if decision %}
+Tebrikler! Admin tarafından sistemden onay verilmiştir.
+{% else %}
+Üzgünüz! Bu sitede satış yapabilmeniz için yeterli seviyede değilsiniz.
+{% endif %}
+
+Lütfen Aşağıdaki Linke tıklayarak sitemizi ziyaret ediniz.
+http://127.0.0.1:8000 
+
+{% endautoescape %}
+

@@ -7,6 +7,7 @@ class VendorAdmin(admin.ModelAdmin):
     filter_horizontal = ()
     list_filter = ["is_approved", "vendor_name",]
     fieldsets = ()
+    list_editable = ("is_approved",)
     
     list_display = ("vendor_name", "user", "is_approved", "created_at", "modified_at",)
     list_display_links = ["user","vendor_name",] # bunlardan birine bassam sayfaya çıkarım

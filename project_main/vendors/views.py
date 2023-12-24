@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.urls import reverse
 
 from accounts.forms import UserForm
+from vendors.models import Vendor
 from vendors.forms import VendorForm
 from accounts.models import User, UserProfile
 from django.contrib import messages
@@ -59,3 +60,6 @@ def register(request):
         "v_form" : v_form,
     }
     return render(request, "registerVendor.html", context= context)
+
+def profile(request):
+    return render(request,"vendor_profile.html", )
