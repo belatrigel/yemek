@@ -116,8 +116,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=False, verbose_name="Kişi")
     profile_pic = models.ImageField(upload_to="users/profile_pic", null=True, blank=True, verbose_name="Profil Resmi")
     cover_pic = models.ImageField(upload_to="users/cover_pic", null=True, blank=True, verbose_name="Kapak Resmi")
-    adress_1 = models.CharField(max_length=100, null=True,blank=True, verbose_name="Adres Satırı 1")
-    adress_2 = models.CharField(max_length=100, null=True,blank=True, verbose_name="Adres Satırı 2")
+    adress = models.CharField(max_length=260, null=True,blank=True, verbose_name="Adres Satırı")
     country = models.CharField(max_length=100, null=True,blank=True, verbose_name="Ülke")
     state = models.CharField(max_length=100, null=True,blank=True, verbose_name="Eyalet")
     city = models.CharField(max_length=100, null=True,blank=True, verbose_name="Şehir")
@@ -131,7 +130,7 @@ class UserProfile(models.Model):
         return f"{self.user}"
 
     def full_address(self):
-        return f"{self.adress_1} {self.adress_2}"
+        return f"{self.adress}"
 
 
 

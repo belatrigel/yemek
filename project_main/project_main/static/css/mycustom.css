@@ -17,3 +17,9 @@
   #myBtn:hover {
     background-color: #555; /* Add a dark-grey background on hover */
   }
+
+  .btn.btn-info {
+  padding: 2px 1.75rem;
+  font-size: 14px;
+  cursor: pointer;
+  }

@@ -1,6 +1,11 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.urls import reverse
 
+from .forms import VendorForm
+from accounts.forms import UserProfileFrom
+
+from django.shortcuts import get_object_or_404
+
 from accounts.forms import UserForm
 from vendors.models import Vendor
 from vendors.forms import VendorForm
@@ -61,5 +66,38 @@ def register(request):
     }
     return render(request, "registerVendor.html", context= context)
 
+from django.contrib.auth.decorators import login_required, user_passes_test
+from accounts.views import check_vendor_user
+
+@login_required(login_url= 'accounts:loginme')
+@user_passes_test(check_vendor_user)
 def profile(request):
-    return render(request,"vendor_profile.html", )
+
+    thisvendor = get_object_or_404(Vendor, user=request.user)
+    thisprofile = get_object_or_404(UserProfile, user= request.user)
+
+    v_form = VendorForm(instance=thisvendor)
+    up_form = UserProfileFrom(instance=thisprofile)
+
+    if request.method == "POST" : # submit butona bastım
+
+        v_form = VendorForm(request.POST, request.FILES, instance=thisvendor)
+        up_form = UserProfileFrom(request.POST, request.FILES, instance=thisprofile)
+
+        if v_form.is_valid() and up_form.is_valid():
+            v_form.save()
+            up_form.save()
+            messages.add_message(request, messages.SUCCESS, "Profil güncelleme başarılı şekilde tamamlandı")
+            return redirect(reverse("vendors:vendor_profile"))
+        else:
+            print(v_form.errors)
+            print(up_form.errors)
+
+    context = {
+        "vendor_profile_form" : v_form,
+        "user_profile_form" : up_form,
+        "profile" : thisprofile,
+        "vendor" : thisvendor,
+    }
+
+    return render(request,"vendor_profile.html", context = context,)
