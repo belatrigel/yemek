@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "accounts",
     "vendors",
+    "menu",
 ]
 
 MIDDLEWARE = [
@@ -64,6 +65,7 @@ TEMPLATES = [
                  "accounts/templates",
                  "jazzmin/templates",
                  "vendors/templates",
+                 "menu/sablonlar",
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
