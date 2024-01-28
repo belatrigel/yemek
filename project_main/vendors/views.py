@@ -48,7 +48,7 @@ def register(request):
             vendor.save()
 
             # send verifikasyon elmek helper fonksiyonu tıpkı normal user sign up gibi...
-            utilities.send_verificasyion_elmek(request, myuser,
+            utilities.send_verificasyion_elmek(request, kisi,
                                                "Hello From FoodOnline, Please activate your account",
                                                "elmek/verifyme.html")
 

@@ -35,8 +35,11 @@
 																		<div class="item-thumb">
 																			<img
 																				class="thumbnail"
-																				src="{{profile.profile_pic.url}}"
-																				alt="profil picture" />
+																				src="{% if profile.profile_pic %} 
+											                                          {{profile.profile_pic.url}}
+														                              {% else %}
+						                                                            {% static 'images/default-profile.png' %}
+														                             {% endif %}" alt="profil picture" />
 																		</div>
 																	</div>
 																</li>
@@ -60,8 +63,11 @@
 																		<div class="item-thumb">
 																			<img
 																				class="thumbnail"
-																				src="{{profile.cover_pic.url}}"
-																				alt="cover foto" />
+																				src="{% if profile.cover_pic %} 
+				                                                                      {{profile.cover_pic.url}}
+						                                                             {% else %}
+						                                                             {% static 'images/default-cover.png' %}
+						                                                            {% endif %}" alt="cover foto" />
 																		</div>
 																	</div>
 																</li>

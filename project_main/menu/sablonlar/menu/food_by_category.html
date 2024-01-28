@@ -36,7 +36,9 @@
                                         <th scope="col">ID</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Image</th>
+                                        <th scope="col">Avail?</th>
                                         <th scope="col">Action</th>
+                        
                                     </tr>
                                 </thead>
                                 
@@ -44,20 +46,38 @@
                                 <tbody>
                                     {% for item in items %}
                                     <tr>
-                                        <th scope="row">{{ forloop.counter }}</th>
+                                        <th scope="row">{{ forloop.counter }}
+
+                                        </th>
                                         <td class="text-left">
                                             <a href="#">
                                                 <p class="mb-0 font-weight-bold">
                                                     {{item.food_title}}
                                                 </p>
                                                 <small class="text-muted">
-                                                    {{item.description}}
+                                                    {{item.description|slice:"0:50"}}...
                                                 </small>
                                             </a>
                                         </td>
-                                        <td><img src="{{item.food_image.url}}" alt="no image" width="40"></td>
-                                        <td><i class="fa-solid fa-pen-to-square fa-shake pr-2"></i> 
-                                            <i class="fa-solid fa-trash-can fa-bounce fa-lg pl-2" style="color: #ff0000;"></i>
+                                        <td>
+                                            <img src="{{item.food_image.url}}" alt="no image" width="40">
+                                        </td>
+                                        {% if item.is_avail %}
+                                        <td>
+                                            <span class="badge badge-success px-4">Avail</span>
+                                        </td>
+                                        {% else %}
+                                            <td>
+                                                <span class="badge badge-danger px-4">No Avail</span>
+                                            </td>
+                                        {% endif %}
+                                        <td>
+                                            <a href="{% url 'menu:edit_food' item.id %}" style="color:unset;">
+                                                <i class="fa-solid fa-pen-to-square fa-shake pr-2"></i> 
+                                            </a>
+                                            <a href="{% url 'menu:delete_food' item.id %}" style="color:unset;" onclick="return confirm('Bu ürünü silmek istediğinize emin misiniz?')">
+                                                <i class="fa-solid fa-trash-can fa-bounce fa-lg pl-2" style="color: #ff0000;"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                     {% endfor %}
@@ -69,7 +89,7 @@
                                 No food items in <span class="text-uppercase">{{category_name}}</span>
                             </h5>
                             <div class="text-center">
-                                 <a href="#"
+                                 <a href="{% url 'menu:add_food' %}"
                                 class="btn btn-success m-1"><i
                                     class="fa-solid fa-cart-plus fa-beat-fade pr-2"></i>Add
                                 Food</a>
