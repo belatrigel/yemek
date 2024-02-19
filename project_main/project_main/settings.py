@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "accounts",
     "vendors",
     "menu",
+    "marketplace",
 ]
 
 MIDDLEWARE = [
@@ -66,6 +67,7 @@ TEMPLATES = [
                  "jazzmin/templates",
                  "vendors/templates",
                  "menu/sablonlar",
+                 "marketplace/temps",
                  ],
         'APP_DIRS': True,
         'OPTIONS': {

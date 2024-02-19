@@ -25,7 +25,7 @@ class Category(models.Model):
     
 class FoodItem(models.Model):
     restoran = models.ForeignKey(Vendor, on_delete = models.CASCADE) # restoran silinirse bu kategori satırı da kople silinir
-    category = models.ForeignKey(Category, on_delete = models.CASCADE)
+    category = models.ForeignKey(Category, on_delete = models.CASCADE, related_name = "fooditems")
     food_title = models.CharField(max_length = 50, unique= True)
     slug_name = models.SlugField(max_length = 50, unique = True) # bunu kategori için urlde kullanacağım
     description = models.TextField(max_length = 300, blank = True)

@@ -13,12 +13,14 @@ from accounts.models import User, UserProfile
 from django.contrib import messages
 from accounts import utilities
 
+from django.template.defaultfilters import slugify
+
 # Create your views here.
 
 def register(request):
     if request.user.is_authenticated:
         messages.add_message(request, messages.INFO, "Zaten Giriş yaptığınız için dashboard yönlendirdim.")
-        return redirect(reverse("accounts:dashboardme"))
+        return redirect(reverse("accounts:decidemyboard"))
     form = UserForm()
     v_form = VendorForm()
 
@@ -44,6 +46,7 @@ def register(request):
             vendor = v_form.save(commit=False) # v_form içinde 2 alan zaten var.
             vendor.user = kisi
             vendor.user_profile = UserProfile.objects.get(user = kisi) # ben kisi save dediğim anda signals sayesinde profile otomatik oluştu ve bağlandı
+            vendor.vendor_slug = slugify(v_form.cleaned_data["vendor_name"]) + "-" + str(kisi.id)
 
             vendor.save()
 
